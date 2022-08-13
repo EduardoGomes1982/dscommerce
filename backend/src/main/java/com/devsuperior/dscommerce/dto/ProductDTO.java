@@ -16,13 +16,9 @@ public class ProductDTO {
 		this.price = price;
 		this.imgUrl = imgUrl;
 	}
-	
+
 	public ProductDTO(Product entity) {
-		id = entity.getId();
-		name = entity.getName();
-		description = entity.getDescription();
-		price = entity.getPrice();
-		imgUrl = entity.getImgUrl();
+		this(entity.getId(), entity.getName(), entity.getDescription(), entity.getPrice(), entity.getImgUrl());
 	}
 
 	public Long getId() {
