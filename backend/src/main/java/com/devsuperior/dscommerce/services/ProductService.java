@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.dscommerce.dto.ProductDTO;
 import com.devsuperior.dscommerce.dto.ProductMinDTO;
+import com.devsuperior.dscommerce.entities.Category;
 import com.devsuperior.dscommerce.entities.Product;
 import com.devsuperior.dscommerce.repositories.ProductRepository;
 import com.devsuperior.dscommerce.services.exceptions.DatabaseException;
@@ -80,6 +81,13 @@ public class ProductService {
 			entity.setDescription(dto.getDescription());
 			entity.setPrice(dto.getPrice());
 			entity.setImgUrl(dto.getImgUrl());
+			entity.getCategories().clear();
+			
+			dto.getCategories().forEach(c -> {
+				Category cat = new Category();
+				cat.setId(c.getId());
+				entity.getCategories().add(cat);
+			});
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(RESOURCE_NOT_FOUND);
 		}

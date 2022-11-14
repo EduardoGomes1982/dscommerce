@@ -2,7 +2,11 @@ package com.devsuperior.dscommerce.dto;
 
 import com.devsuperior.dscommerce.entities.Product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -20,6 +24,9 @@ public class ProductDTO {
 	@Positive(message = "Preço deve ser maior que zero.")
 	private Double price;
 	private String imgUrl;
+	
+	@NotEmpty(message = "Deve haver pelo menos uma categoria")
+	private List<CategoryDTO> categories = new ArrayList<>();
 
 	public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
 		this.id = id;
@@ -31,6 +38,7 @@ public class ProductDTO {
 
 	public ProductDTO(Product entity) {
 		this(entity.getId(), entity.getName(), entity.getDescription(), entity.getPrice(), entity.getImgUrl());
+		entity.getCategories().forEach(c -> categories.add(new CategoryDTO(c)));
 	}
 
 	public Long getId() {
@@ -51,5 +59,9 @@ public class ProductDTO {
 
 	public String getImgUrl() {
 		return imgUrl;
+	}
+
+	public List<CategoryDTO> getCategories() {
+		return categories;
 	}
 }
