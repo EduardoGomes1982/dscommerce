@@ -1,6 +1,5 @@
 package com.devsuperior.dscommerce.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,13 +14,14 @@ import com.devsuperior.dscommerce.repositories.UserRepository;
 
 @Service
 public class UserService implements UserDetailsService {
-
-	@Autowired
 	private UserRepository userRepository;
+
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
 		User user = userRepository.findByEmail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("Email not found");
