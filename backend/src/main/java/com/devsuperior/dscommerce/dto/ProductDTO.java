@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -21,6 +22,7 @@ public class ProductDTO {
 	@Size(min = 10, message = "Descrição precisa ter mais de 10 caracteres.")
 	private String description;
 
+	@NotNull(message = "Campo requerido.")
 	@Positive(message = "Preço deve ser maior que zero.")
 	private Double price;
 	private String imgUrl;
