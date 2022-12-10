@@ -1,35 +1,11 @@
 import ButtonNextPage from "../../../components/ButtonNextPage";
 import CatalogCard from "../../../components/CatalogCard";
-import HeaderClient from "../../../components/HeaderClient";
 import SearchBar from "../../../components/SearchBar";
 import { ProductDTO } from "../../../models/product";
+import * as productService from "../../../services/product-service";
 import "./styles.css";
 
-const product: ProductDTO = {
-    id: 2,
-    name: "Smart TV 43\" Led",
-    description: "Esta é uma bela TV e do tamanho certo para seu gosto.",
-    imgUrl: "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg",
-    price: 2859.99,
-    categories: [
-        {
-            id: 3,
-            name: "Compudadores"
-        },
-        {
-            id: 5,
-            name: "Eletrônicos"
-        },
-        {
-            id: 1,
-            name: "Importados"
-        }
-    ]
-}
-
-const products: ProductDTO[] = [
-    product, product, product
-]
+const products: ProductDTO[] = productService.findAll();
 
 export default function Catalog(): JSX.Element {
     return (
@@ -38,7 +14,7 @@ export default function Catalog(): JSX.Element {
                 <SearchBar />
                 <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
                     {
-                        products.map(p => (<CatalogCard product={p} />))
+                        products.map(p => (<CatalogCard key={p.id} product={p} />))
                     }
                 </div>
                 <ButtonNextPage />
