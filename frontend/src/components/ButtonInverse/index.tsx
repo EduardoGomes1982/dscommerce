@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 type Props = {
@@ -6,8 +7,10 @@ type Props = {
 
 export default function ButtomInverse({ buttonTitle }: Props): JSX.Element {
     return (
-        <div className="dsc-btn dsc-btn-white">
-            {buttonTitle}
-        </div>
+        <Link to="/">
+            <div className="dsc-btn dsc-btn-white">
+                {buttonTitle}
+            </div>
+        </Link>
     );
 }
