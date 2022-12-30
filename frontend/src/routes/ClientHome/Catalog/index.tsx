@@ -14,7 +14,7 @@ export default function Catalog(): JSX.Element {
             response => {
                 setProducts(response.data.content);
             }
-        )
+        );
     }, []);
 
     return (

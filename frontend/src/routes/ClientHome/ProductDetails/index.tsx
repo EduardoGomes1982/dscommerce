@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import ProductDetailsCard from "../../../components/ProductDetailsCard";
@@ -11,13 +11,14 @@ import "./styles.css";
 export default function ProductDetails(): JSX.Element {
     const params = useParams();
     const [product, setProduct] = useState<ProductDTO>();
+    const navigate = useNavigate();
 
     useEffect(() => {
         productService.findById(Number(params.productId)).then(
             response => {
                 setProduct(response.data);
             }
-        );
+        ).catch(() => navigate("/"));
     }, []);
 
     return (
