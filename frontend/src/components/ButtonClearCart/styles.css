@@ -1,0 +1,5 @@
+.dsc-btn-clear {
+  border: 5px solid var(--dsc-color-btn-inverse);
+  background-color: var(--dsc-color-btn-clear);
+  color: var(--dsc-color-btn-primary);
+}
