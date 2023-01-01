@@ -24,6 +24,12 @@ export default function Cart() {
         cartService.decreaseItem(productId);
         setCart(cartService.getCart());
     }
+
+    function handleRemoveItemClick(productId: number) {
+        cartService.removeItem(productId);
+        setCart(cartService.getCart());
+    }
+
     return (
         <main>
             <section id="cart-container-section" className="dsc-container">
@@ -46,6 +52,7 @@ export default function Cart() {
                                                 <p>{item.quantity}</p>
                                                 <div onClick={() => handleIncreaseItemClick(item.productId)} className="dsc-cart-item-quantity-btn">+</div>
                                             </div>
+                                            <div onClick={() => handleRemoveItemClick(item.productId)} className="dsc-cart-remove-item">Remover</div>
                                         </div>
                                     </div>
                                     <div className="dsc-cart-item-right">

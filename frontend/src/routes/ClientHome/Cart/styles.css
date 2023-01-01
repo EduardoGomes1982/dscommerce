@@ -57,6 +57,18 @@
   .dsc-cart-item-quantity-container p {
     margin: 0 5px;
   }
+
+  .dsc-cart-remove-item {
+    border: 1px solid var(--dsc-color-btn-primary);
+    background-color: var(--dsc-color-btn-clear);
+    color: var(--dsc-color-btn-inverse);
+    font-weight: 700;
+    font-size: 14px;
+    width: 67px;
+    border-radius: 10px;
+    padding: 1px;
+    cursor: pointer;
+  }
   
   @media (min-width: 576px) {
     .dsc-cart-item-container {

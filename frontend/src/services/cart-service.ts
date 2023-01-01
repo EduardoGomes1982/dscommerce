@@ -42,3 +42,12 @@ export function decreaseItem(productId: number) {
         cartRepository.save(cart);
     }
 }
+
+export function removeItem(productId: number) {
+    const cart = getCart();
+    const item = cart.items.find(i => i.productId === productId);
+    if (item) {
+        cart.items = cart.items.filter(i => i.productId !== item.productId);
+        cartRepository.save(cart);
+    }
+}
