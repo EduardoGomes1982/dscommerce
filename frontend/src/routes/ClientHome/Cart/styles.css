@@ -59,12 +59,15 @@
   }
 
   .dsc-cart-remove-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid var(--dsc-color-btn-primary);
     background-color: var(--dsc-color-btn-clear);
-    color: var(--dsc-color-btn-inverse);
+    color: var(--dsc-color-font-primary);
     font-weight: 700;
-    font-size: 14px;
-    width: 67px;
+    font-size: 9px;
+    width: 60px;
     border-radius: 10px;
     padding: 1px;
     cursor: pointer;
