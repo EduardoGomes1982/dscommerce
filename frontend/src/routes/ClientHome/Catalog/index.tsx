@@ -6,20 +6,35 @@ import { ProductDTO } from "../../../models/product";
 import * as productService from "../../../services/product-service";
 import "./styles.css";
 
+type QueryParams = {
+    page: number;
+    name: string;
+}
+
 export default function Catalog(): JSX.Element {
     const [products, setProducts] = useState<ProductDTO[]>([]);
-    const [productName, setProductName] = useState("");
+    const [isLastPage, setIsLastPage] = useState(false);
+    const [queryParams, setQueryParams] = useState<QueryParams>({
+        page: 0,
+        name: ""
+    });
 
     useEffect(() => {
-        productService.findPageRequest(0, productName).then(
+        productService.findPageRequest(queryParams.page, queryParams.name).then(
             response => {
-                setProducts(response.data.content);
+                setProducts(products.concat(response.data.content));
+                setIsLastPage(response.data.last);
             }
         );
-    }, [productName]);
+    }, [queryParams]);
 
     function handleSearch(searchText: string) {
-        setProductName(searchText);
+        setProducts([])
+        setQueryParams({ ...queryParams, page: 0, name: searchText });
+    }
+
+    function handleNextPageClick() {
+        setQueryParams({ ...queryParams, page: ++queryParams.page })
     }
 
     return (
@@ -31,7 +46,12 @@ export default function Catalog(): JSX.Element {
                         products.map(p => (<CatalogCard key={p.id} product={p} />))
                     }
                 </div>
-                <ButtonNextPage />
+                {
+                    !isLastPage &&
+                    <div onClick={handleNextPageClick}>
+                        <ButtonNextPage />
+                    </div>
+                }
             </section>
         </main>
     );
