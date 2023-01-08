@@ -1,33 +1,41 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import ButtomClearCart from "../../../components/ButtonClearCart";
 import ButtomInverse from "../../../components/ButtonInverse";
 import ButtomPrimary from "../../../components/ButtonPrimary";
 import { OrderDTO } from "../../../models/order";
 import * as cartService from "../../../services/cart-service";
+import { ContextCartCount } from "../../../utils/context-cart";
 import "./styles.css";
 
 export default function Cart() {
     const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
+    const { setContextCartCount } = useContext(ContextCartCount);
 
     function handleClearClick() {
         cartService.clearCart();
-        setCart(cartService.getCart());
+        updateCart();
     }
 
     function handleIncreaseItemClick(productId: number) {
         cartService.increaseItem(productId);
-        setCart(cartService.getCart());
+        updateCart();
     }
 
     function handleDecreaseItemClick(productId: number) {
         cartService.decreaseItem(productId);
-        setCart(cartService.getCart());
+        updateCart();
     }
 
     function handleRemoveItemClick(productId: number) {
         cartService.removeItem(productId);
-        setCart(cartService.getCart());
+        updateCart();
+    }
+
+    function updateCart() {
+        const cart = cartService.getCart();
+        setCart(cart);
+        setContextCartCount(cart.items.length);
     }
 
     return (
