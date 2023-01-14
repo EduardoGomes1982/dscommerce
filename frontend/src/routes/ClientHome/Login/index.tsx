@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CredentialsDTO } from "../../../models/auth";
-import { loginRequest } from "../../../services/auth-service";
+import * as authService from "../../../services/auth-service";
 import "./styles.css"
 
 export default function () {
@@ -11,8 +11,8 @@ export default function () {
 
     function handleSubmit(event: any) {
         event.preventDefault();
-        loginRequest(formData)
-        .then((response) => console.log(response.data))
+        authService.loginRequest(formData)
+        .then((response) => authService.savaAccessToken(response.data.access_token))
         .catch((error) => console.log("Erro no Login", error));
     }
 
