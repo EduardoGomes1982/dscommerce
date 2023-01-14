@@ -1,20 +1,42 @@
+import { useState } from "react";
+import { CredentialsDTO } from "../../../models/auth";
+import { loginRequest } from "../../../services/auth-service";
 import "./styles.css"
 
 export default function () {
+    const [formData, setFormData] = useState<CredentialsDTO>({
+        username: "",
+        password: ""
+    });
+
+    function handleSubmit(event: any) {
+        event.preventDefault();
+        loginRequest(formData)
+        .then((response) => console.log(response.data))
+        .catch((error) => console.log("Erro no Login", error));
+    }
+
+    function handleInputChange(event: any) {
+        const value = event.target.value;
+        const name = event.target.name;
+        setFormData({ ...formData, [name]: value});
+    }
+
     return (
         <main>
             <section id="login-section" className="dsc-container">
                 <div className="dsc-login-form-container">
-                    <form className="dsc-card dsc-form">
+                    <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
                         <h2>Login</h2>
                         <div className="dsc-form-controls-container">
                             <div>
-                                <input className="dsc-form-control" type="text"
-                                    placeholder="Email" />
+                                <input className="dsc-form-control" type="text" name="username" value={formData.username}
+                                    placeholder="Email" onChange={handleInputChange} />
                                 <div className="dsc-form-error"></div>
                             </div>
                             <div>
-                                <input className="dsc-form-control" type="password" placeholder="Senha" />
+                                <input className="dsc-form-control" type="password" name="password" value={formData.password}
+                                    placeholder="Senha" onChange={handleInputChange} />
                             </div>
                         </div>
                         <div className="dsc-login-form-buttons dsc-mt20">
