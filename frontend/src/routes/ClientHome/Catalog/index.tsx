@@ -3,7 +3,6 @@ import ButtonNextPage from "../../../components/ButtonNextPage";
 import CatalogCard from "../../../components/CatalogCard";
 import SearchBar from "../../../components/SearchBar";
 import { ProductDTO } from "../../../models/product";
-import { isAuthenticated } from "../../../services/auth-service";
 import * as productService from "../../../services/product-service";
 import "./styles.css";
 
@@ -25,7 +24,6 @@ export default function Catalog(): JSX.Element {
             response => {
                 setProducts(products.concat(response.data.content));
                 setIsLastPage(response.data.last);
-                console.log("Authenticated: ", isAuthenticated());
             }
         );
     }, [queryParams]);
