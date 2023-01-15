@@ -12,7 +12,10 @@ export default function () {
     function handleSubmit(event: any) {
         event.preventDefault();
         authService.loginRequest(formData)
-        .then((response) => authService.savaAccessToken(response.data.access_token))
+        .then((response) => {
+            authService.savaAccessToken(response.data.access_token);
+            console.log(authService.getAccessTokenPayload()?.user_name);
+        })
         .catch((error) => console.log("Erro no Login", error));
     }
 

@@ -9,6 +9,7 @@ export class OrderDTO {
         return sum;
     }
 }
+
 export class OrderItemDTO {
     constructor(
         public productId: number,
