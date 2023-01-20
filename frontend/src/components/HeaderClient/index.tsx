@@ -4,6 +4,7 @@ import adminIcon from "../../assets/admin.svg";
 import * as authService from "../../services/auth-service";
 import { ContextToken } from "../../utils/context-token";
 import CartIcon from "../CartIcon";
+import LoggedUser from "../LoggerUser";
 import "./styles.css";
 
 export default function HeaderClient(): JSX.Element {
@@ -32,7 +33,7 @@ export default function HeaderClient(): JSX.Element {
                             </div>
                         </Link>
                     </div>
-                    <Link to="/login">Entrar</Link>
+                    <LoggedUser />
                 </div>
             </nav>
         </header>
