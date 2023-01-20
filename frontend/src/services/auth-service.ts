@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from "axios";
 import jwtDecode from "jwt-decode";
 import QueryString from "qs";
 import * as accessTokenRepository from "../localstorage/access-token-repository";
-import { AccessTokenPayloadDTO, CredentialsDTO } from "../models/auth";
+import { AccessTokenPayloadDTO, CredentialsDTO, RoleEnum } from "../models/auth";
 import * as requests from "../services/requests";
 import { CLIENT_ID, CLIENT_SECRET } from "../utils/system";
 
@@ -47,4 +47,14 @@ export function getAccessTokenPayload(): AccessTokenPayloadDTO | undefined {
 export function isAuthenticated(): boolean {
     const tokenPayload = getAccessTokenPayload();
     return tokenPayload && tokenPayload.exp * 1000 > Date.now() ? true : false;
+}
+
+export function hasAnyRoles(roles: RoleEnum[]): boolean {
+    if (roles.length === 0) return true;
+    
+    const tokenPayload = getAccessTokenPayload();
+    
+    if (tokenPayload !== undefined) return roles.some(role => tokenPayload.authorities.includes(role));
+    
+    return false;
 }
