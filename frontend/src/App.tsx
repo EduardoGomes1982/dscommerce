@@ -9,6 +9,7 @@ import Cart from "./routes/ClientHome/Cart";
 import Catalog from "./routes/ClientHome/Catalog";
 import Login from "./routes/ClientHome/Login";
 import ProductDetails from "./routes/ClientHome/ProductDetails";
+import Confirmation from "./routes/ClientHome/Confirmation";
 import * as authService from "./services/auth-service";
 import * as cartService from "./services/cart-service";
 import { ContextCartCount } from "./utils/context-cart";
@@ -34,10 +35,11 @@ export default function App(): JSX.Element {
           <Routes>
             <Route path="/" element={<ClientHome />}>
               <Route index element={<Catalog />} />
-              <Route path="catalog" element={<Catalog />} />
-              <Route path="product-details/:productId" element={<ProductDetails />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="login" element={<Login />} />
+              <Route path="/catalog" element={<Catalog />} />
+              <Route path="/product-details/:productId" element={<ProductDetails />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/confirmation/:orderId" element={<Confirmation />} />
             </Route>
             <Route path="/admin" element={<PrivateRoute children={<Admin />} roles={["ROLE_ADMIN"]} />}>
               <Route index element={<AdminHome />} />

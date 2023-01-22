@@ -33,10 +33,10 @@ axios.interceptors.response.use(
     },
     function (error) {
         if (error.response.status === 401)
-            history.push("login");
+            history.push("/login");
 
         if (error.response.status === 403)
-            history.push("catalog");
+            history.push("/catalog");
 
         return Promise.reject(error);
     }
