@@ -6,6 +6,7 @@ import { ProductDTO } from "../../../models/product";
 import { QueryParams } from "../../../utils/params-type";
 import * as productService from "../../../services/product-service";
 import "./styles.css";
+import SearchBar from "../../../components/SearchBar";
 
 export default function ProductListing() {
     const [products, setProducts] = useState<ProductDTO[]>([]);
@@ -24,6 +25,11 @@ export default function ProductListing() {
         );
     }, [queryParams]);
 
+    function handleSearch(searchText: string) {
+        setProducts([])
+        setQueryParams({ ...queryParams, page: 0, name: searchText });
+    }
+
     return (
         <main>
             <section id="product-listing-section" className="dsc-container">
@@ -31,11 +37,7 @@ export default function ProductListing() {
                 <div className="dsc-btn-page-container dsc-mb20">
                     <div className="dsc-btn dsc-btn-white">Novo</div>
                 </div>
-                <form className="dsc-search-bar">
-                    <button type="submit">🔎︎</button>
-                    <input type="text" placeholder="Nome do produto" />
-                    <button type="reset">🗙</button>
-                </form>
+                <SearchBar onSearch={handleSearch} />
                 <table className="dsc-table dsc-mb20 dsc-mt20">
                     <thead>
                         <tr>
