@@ -1,14 +1,16 @@
 import { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ButtomClearCart from "../../../components/ButtonClearCart";
 import ButtomInverse from "../../../components/ButtonInverse";
 import ButtomPrimary from "../../../components/ButtonPrimary";
 import { OrderDTO } from "../../../models/order";
 import * as cartService from "../../../services/cart-service";
+import * as orderService from "../../../services/order-service";
 import { ContextCartCount } from "../../../utils/context-cart";
 import "./styles.css";
 
 export default function Cart() {
+    const navigate = useNavigate();
     const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
     const { setContextCartCount } = useContext(ContextCartCount);
 
@@ -36,6 +38,15 @@ export default function Cart() {
         const cart = cartService.getCart();
         setCart(cart);
         setContextCartCount(cart.items.length);
+    }
+
+    function handlePlaceOrderClick() {
+        orderService.placeOrderRequest(cart)
+            .then(response => {
+                cartService.clearCart();
+                setContextCartCount(0);
+                navigate(`/confirmation/${response.data.id}`);
+            });
     }
 
     return (
@@ -74,7 +85,7 @@ export default function Cart() {
                         </div>
                     )}
                 <div className="dsc-btn-page-container">
-                    <ButtomPrimary buttonTitle="Finalizar pedido" />
+                    <ButtomPrimary buttonTitle="Finalizar pedido" onButtonClick={handlePlaceOrderClick} />
                     <NavLink to="/catalog">
                         <ButtomInverse buttonTitle="Continuar comprando" />
                     </NavLink>

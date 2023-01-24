@@ -3,14 +3,9 @@ import ButtonNextPage from "../../../components/ButtonNextPage";
 import CatalogCard from "../../../components/CatalogCard";
 import SearchBar from "../../../components/SearchBar";
 import { ProductDTO } from "../../../models/product";
-import { hasAnyRoles } from "../../../services/auth-service";
 import * as productService from "../../../services/product-service";
+import { QueryParams } from "../../../utils/params-type";
 import "./styles.css";
-
-type QueryParams = {
-    page: number;
-    name: string;
-}
 
 export default function Catalog(): JSX.Element {
     const [products, setProducts] = useState<ProductDTO[]>([]);

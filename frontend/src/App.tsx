@@ -15,6 +15,8 @@ import * as cartService from "./services/cart-service";
 import { ContextCartCount } from "./utils/context-cart";
 import { ContextToken } from "./utils/context-token";
 import { history } from './utils/history';
+import ProductListing from "./routes/Admin/ProductListing";
+import ProductForm from "./routes/Admin/ProductForm";
 
 export default function App(): JSX.Element {
   const [contextCartCount, setContextCartCount] = useState<number>(0);
@@ -34,15 +36,18 @@ export default function App(): JSX.Element {
         <HistoryRouter history={history}>
           <Routes>
             <Route path="/" element={<ClientHome />}>
-              <Route index element={<Catalog />} />
-              <Route path="/catalog" element={<Catalog />} />
-              <Route path="/product-details/:productId" element={<ProductDetails />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/confirmation/:orderId" element={<Confirmation />} />
+              <Route index element={<Navigate to="catalog" />} />
+              <Route path="catalog" element={<Catalog />} />
+              <Route path="product-details/:productId" element={<ProductDetails />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="login" element={<Login />} />
+              <Route path="confirmation/:orderId" element={<PrivateRoute><Confirmation /></PrivateRoute>} />
             </Route>
             <Route path="/admin" element={<PrivateRoute children={<Admin />} roles={["ROLE_ADMIN"]} />}>
-              <Route index element={<AdminHome />} />
+              <Route index element={<Navigate to="home" />} />
+              <Route path="home" element={<AdminHome />} />
+              <Route path="products" element={<ProductListing />} />
+              <Route path="products/:productId" element={<ProductForm />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

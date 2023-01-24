@@ -1,12 +1,13 @@
 import "./styles.css";
 
 type Props = {
-    buttonTitle: string;
+    buttonTitle: string,
+    onButtonClick?: () => void
 }
 
-export default function ButtomPrimary({ buttonTitle }: Props): JSX.Element {
+export default function ButtomPrimary({ buttonTitle, onButtonClick }: Props): JSX.Element {
     return (
-        <div className="dsc-btn dsc-btn-blue">
+        <div onClick={onButtonClick} className="dsc-btn dsc-btn-blue">
             {buttonTitle}
         </div>
     );
