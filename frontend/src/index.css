@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
 :root {
   --dsc-color-bg-primary: #e8e8e8;
   --dsc-color-bg-secondary: #ffe500;
   --dsc-color-bg-tertiary: #636363;
   --dsc-color-bg-quaternary: #0caf1d;
-  --dsc-color-bg-notification: #FF0000;
+  --dsc-color-bg-notification: #ff0000;
 
   --dsc-color-card-bg: #fff;
   --dsc-color-card-border: #d9d9d9;
@@ -26,7 +26,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
 }
 
 a,
@@ -330,6 +330,37 @@ nav a {
 
 .dsc-tb768 {
   display: none;
+}
+
+/*-----------------------------------------------------------------*/
+/* dialog styles */
+
+.dsc-dialog-background {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dsc-dialog-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--dsc-color-card-bg);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.dsc-dialog-box h2 {
+  font-size: 20px;
+  color: var(--dsc-color-font-primary);
 }
 
 @media (min-width: 576px) {

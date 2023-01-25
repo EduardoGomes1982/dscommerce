@@ -7,6 +7,7 @@ import { QueryParams } from "../../../utils/params-type";
 import * as productService from "../../../services/product-service";
 import "./styles.css";
 import SearchBar from "../../../components/SearchBar";
+import DialogInfo from "../../../components/DialogInfo";
 
 export default function ProductListing() {
     const [products, setProducts] = useState<ProductDTO[]>([]);
@@ -70,6 +71,7 @@ export default function ProductListing() {
                 </table>
                 {!isLastPage && <div onClick={handleNextPageClick} className="dsc-btn-next-page">Carregar mais</div>}
             </section>
+            <DialogInfo />
         </main>
     );
 }
