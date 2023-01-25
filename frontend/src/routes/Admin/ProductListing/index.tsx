@@ -12,6 +12,11 @@ import DialogInfo from "../../../components/DialogInfo";
 export default function ProductListing() {
     const [products, setProducts] = useState<ProductDTO[]>([]);
     const [isLastPage, setIsLastPage] = useState(false);
+    const [dialogInfoData, setDialogInfoData] = useState({
+        visible: false,
+        message: "Operação com Sucesso"
+    });
+
     const [queryParams, setQueryParams] = useState<QueryParams>({
         page: 0,
         name: ""
@@ -32,7 +37,15 @@ export default function ProductListing() {
     }
 
     function handleNextPageClick() {
-        setQueryParams({ ...queryParams, page: ++queryParams.page })
+        setQueryParams({ ...queryParams, page: ++queryParams.page });
+    }
+
+    function handleDialogInfoClose() {
+        setDialogInfoData({...dialogInfoData, visible: false});
+    }
+
+    function handleDeleteClick(){
+        setDialogInfoData({...dialogInfoData, visible: true});
     }
 
     return (
@@ -63,7 +76,7 @@ export default function ProductListing() {
                                     <td className="dsc-tb768">R$ {product.price}</td>
                                     <td className="dsc-txt-left">{product.name}</td>
                                     <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                                    <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                                    <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" onClick={handleDeleteClick} /></td>
                                 </tr>
                             ))
                         }
@@ -71,7 +84,7 @@ export default function ProductListing() {
                 </table>
                 {!isLastPage && <div onClick={handleNextPageClick} className="dsc-btn-next-page">Carregar mais</div>}
             </section>
-            <DialogInfo />
+            {dialogInfoData.visible && <DialogInfo message={dialogInfoData.message} onDialogClose={handleDialogInfoClose} />}
         </main>
     );
 }
