@@ -30,6 +30,10 @@ export default function ProductListing() {
         setQueryParams({ ...queryParams, page: 0, name: searchText });
     }
 
+    function handleNextPageClick() {
+        setQueryParams({ ...queryParams, page: ++queryParams.page })
+    }
+
     return (
         <main>
             <section id="product-listing-section" className="dsc-container">
@@ -64,7 +68,7 @@ export default function ProductListing() {
                         }
                     </tbody>
                 </table>
-                <div className="dsc-btn-next-page">Carregar mais</div>
+                {!isLastPage && <div onClick={handleNextPageClick} className="dsc-btn-next-page">Carregar mais</div>}
             </section>
         </main>
     );
