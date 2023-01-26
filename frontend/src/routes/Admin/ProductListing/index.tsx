@@ -8,6 +8,7 @@ import * as productService from "../../../services/product-service";
 import "./styles.css";
 import SearchBar from "../../../components/SearchBar";
 import DialogInfo from "../../../components/DialogInfo";
+import DialogConfirmation from "../../../components/DialogConfirmation";
 
 export default function ProductListing() {
     const [products, setProducts] = useState<ProductDTO[]>([]);
@@ -15,6 +16,10 @@ export default function ProductListing() {
     const [dialogInfoData, setDialogInfoData] = useState({
         visible: false,
         message: "Operação com Sucesso"
+    });
+    const [dialogConfirmationAnswer, setDialogConfirmationAnswer] = useState({
+        visible: false,
+        message: "Tem certeza?"
     });
 
     const [queryParams, setQueryParams] = useState<QueryParams>({
@@ -41,11 +46,16 @@ export default function ProductListing() {
     }
 
     function handleDialogInfoClose() {
-        setDialogInfoData({...dialogInfoData, visible: false});
+        setDialogInfoData({ ...dialogInfoData, visible: false });
     }
 
-    function handleDeleteClick(){
-        setDialogInfoData({...dialogInfoData, visible: true});
+    function handleDeleteClick() {
+        setDialogConfirmationAnswer({ ...dialogConfirmationAnswer, visible: true });
+    }
+
+    function handleDialogConfirmationAnswer(answer: boolean) {
+        console.log(answer);
+        setDialogConfirmationAnswer({...dialogConfirmationAnswer, visible: false});
     }
 
     return (
@@ -84,7 +94,14 @@ export default function ProductListing() {
                 </table>
                 {!isLastPage && <div onClick={handleNextPageClick} className="dsc-btn-next-page">Carregar mais</div>}
             </section>
-            {dialogInfoData.visible && <DialogInfo message={dialogInfoData.message} onDialogClose={handleDialogInfoClose} />}
+            {
+                dialogInfoData.visible &&
+                <DialogInfo message={dialogInfoData.message} onDialogClose={handleDialogInfoClose} />
+            }
+            {
+                dialogConfirmationAnswer.visible &&
+                <DialogConfirmation message={dialogConfirmationAnswer.message} onDialogAnswer={handleDialogConfirmationAnswer} />
+            }
         </main>
     );
 }

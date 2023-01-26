@@ -363,6 +363,12 @@ nav a {
   color: var(--dsc-color-font-primary);
 }
 
+.dsc-dialog-btn-container {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
 @media (min-width: 576px) {
   .dsc-tb576 {
     display: table-cell;
