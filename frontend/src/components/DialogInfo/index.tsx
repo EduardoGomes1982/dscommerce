@@ -1,4 +1,4 @@
-import ButtomPrimary from "../ButtonPrimary";
+import ButtonPrimary from "../ButtonPrimary";
 
 type Props = {
     message: string,
@@ -10,7 +10,7 @@ export default function DialogInfo({ message, onDialogClose }: Props) {
         <div className="dsc-dialog-background" onClick={onDialogClose}>
             <div className="dsc-dialog-box" onClick={(e) => e.stopPropagation()}>
                 <h2>{message}</h2>
-                <ButtomPrimary buttonTitle="Ok" onButtonClick={onDialogClose} />
+                <ButtonPrimary buttonTitle="Ok" onButtonClick={onDialogClose} />
             </div>
         </div>
     );

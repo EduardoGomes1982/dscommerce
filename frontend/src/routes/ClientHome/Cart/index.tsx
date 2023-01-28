@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import ButtomClearCart from "../../../components/ButtonClearCart";
-import ButtomInverse from "../../../components/ButtonInverse";
-import ButtomPrimary from "../../../components/ButtonPrimary";
+import ButtonClearCart from "../../../components/ButtonClearCart";
+import ButtonInverse from "../../../components/ButtonInverse";
+import ButtonPrimary from "../../../components/ButtonPrimary";
 import { OrderDTO } from "../../../models/order";
 import * as cartService from "../../../services/cart-service";
 import * as orderService from "../../../services/order-service";
@@ -85,12 +85,12 @@ export default function Cart() {
                         </div>
                     )}
                 <div className="dsc-btn-page-container">
-                    <ButtomPrimary buttonTitle="Finalizar pedido" onButtonClick={handlePlaceOrderClick} />
+                    <ButtonPrimary buttonTitle="Finalizar pedido" onButtonClick={handlePlaceOrderClick} />
                     <NavLink to="/catalog">
-                        <ButtomInverse buttonTitle="Continuar comprando" />
+                        <ButtonInverse buttonTitle="Continuar comprando" />
                     </NavLink>
                     <div onClick={handleClearClick}>
-                        <ButtomClearCart buttonTitle="Limpar carrinho" />
+                        <ButtonClearCart buttonTitle="Limpar carrinho" />
                     </div>
                 </div>
             </section>

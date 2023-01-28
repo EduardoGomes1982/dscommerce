@@ -1,4 +1,4 @@
-import ButtomPrimary from "../ButtonPrimary";
+import ButtonPrimary from "../ButtonPrimary";
 
 type Props = {
     id: number,
@@ -12,8 +12,8 @@ export default function DialogConfirmation({ id, message, onDialogAnswer }: Prop
             <div className="dsc-dialog-box" onClick={(e) => e.stopPropagation()}>
                 <h2>{message}</h2>
                 <div className="dsc-dialog-btn-container">
-                    <ButtomPrimary buttonTitle="Não" onButtonClick={() => onDialogAnswer(id, false)} />
-                    <ButtomPrimary buttonTitle="Sim" onButtonClick={() => onDialogAnswer(id, true)} />
+                    <ButtonPrimary buttonTitle="Não" onButtonClick={() => onDialogAnswer(id, false)} />
+                    <ButtonPrimary buttonTitle="Sim" onButtonClick={() => onDialogAnswer(id, true)} />
                 </div>
             </div>
         </div>

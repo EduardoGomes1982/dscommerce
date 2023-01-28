@@ -1,6 +1,15 @@
+import { useNavigate } from "react-router-dom";
+import ButtonInverse from "../../../components/ButtonInverse";
+import ButtonPrimary from "../../../components/ButtonPrimary";
 import "./styles.css";
 
 export default function ProductForm() {
+    const navigate = useNavigate();
+
+    function handleCancelClick() {
+        navigate("/admin/products");
+    }
+
     return (
         <main>
             <section id="product-form-section" className="dsc-container">
@@ -30,8 +39,8 @@ export default function ProductForm() {
                         </div>
 
                         <div className="dsc-product-form-buttons">
-                            <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
-                            <button type="submit" className="dsc-btn dsc-btn-blue">Salvar</button>
+                            <ButtonInverse buttonTitle="Cancelar" onButtonClick={handleCancelClick} />
+                            <ButtonPrimary />
                         </div>
                     </form>
                 </div>

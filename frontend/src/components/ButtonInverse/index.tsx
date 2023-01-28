@@ -1,12 +1,13 @@
 import "./styles.css";
 
 type Props = {
-    buttonTitle: string;
+    buttonTitle: string,
+    onButtonClick?: () => void
 }
 
-export default function ButtomInverse({ buttonTitle }: Props): JSX.Element {
+export default function ButtonInverse({ buttonTitle, onButtonClick }: Props): JSX.Element {
     return (
-        <div className="dsc-btn dsc-btn-white">
+        <div onClick={onButtonClick} className="dsc-btn dsc-btn-white">
             {buttonTitle}
         </div>
     );

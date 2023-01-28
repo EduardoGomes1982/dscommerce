@@ -5,7 +5,7 @@ type Props = {
     onButtonClick?: () => void
 }
 
-export default function ButtomPrimary({ buttonTitle, onButtonClick }: Props): JSX.Element {
+export default function ButtonPrimary({ buttonTitle, onButtonClick }: Props): JSX.Element {
     return (
         <div onClick={onButtonClick} className="dsc-btn dsc-btn-blue">
             {buttonTitle}

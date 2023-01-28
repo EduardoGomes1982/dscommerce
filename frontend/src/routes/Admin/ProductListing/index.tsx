@@ -9,8 +9,11 @@ import "./styles.css";
 import SearchBar from "../../../components/SearchBar";
 import DialogInfo from "../../../components/DialogInfo";
 import DialogConfirmation from "../../../components/DialogConfirmation";
+import ButtonInverse from "../../../components/ButtonInverse";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductListing() {
+    const navigate = useNavigate();
     const [products, setProducts] = useState<ProductDTO[]>([]);
     const [isLastPage, setIsLastPage] = useState(false);
     const [dialogInfoData, setDialogInfoData] = useState({
@@ -67,12 +70,16 @@ export default function ProductListing() {
         setDialogConfirmationAnswer({ ...dialogConfirmationAnswer, visible: false });
     }
 
+    function handleCreateClick() {
+        navigate("/admin/products/create");
+    }
+
     return (
         <main>
             <section id="product-listing-section" className="dsc-container">
                 <h2 className="dsc-section-title dsc-mb20">Cadastro de produtos</h2>
                 <div className="dsc-btn-page-container dsc-mb20">
-                    <div className="dsc-btn dsc-btn-white">Novo</div>
+                    <n buttonTitle="Novo" onButtonClick={handleCreateClick} />
                 </div>
                 <SearchBar onSearch={handleSearch} />
                 <table className="dsc-table dsc-mb20 dsc-mt20">
