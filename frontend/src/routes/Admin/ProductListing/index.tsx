@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import prodImg from "../../../assets/computer.png";
+import { useNavigate } from "react-router-dom";
 import deleteIcon from "../../../assets/delete.svg";
 import editIcon from "../../../assets/edit.svg";
-import { ProductDTO } from "../../../models/product";
-import { QueryParams } from "../../../utils/params-type";
-import * as productService from "../../../services/product-service";
-import "./styles.css";
-import SearchBar from "../../../components/SearchBar";
-import DialogInfo from "../../../components/DialogInfo";
-import DialogConfirmation from "../../../components/DialogConfirmation";
 import ButtonInverse from "../../../components/ButtonInverse";
-import { useNavigate } from "react-router-dom";
+import DialogConfirmation from "../../../components/DialogConfirmation";
+import DialogInfo from "../../../components/DialogInfo";
+import SearchBar from "../../../components/SearchBar";
+import { ProductDTO } from "../../../models/product";
+import * as productService from "../../../services/product-service";
+import { QueryParams } from "../../../utils/params-type";
+import "./styles.css";
 
 export default function ProductListing() {
     const navigate = useNavigate();
@@ -79,7 +78,7 @@ export default function ProductListing() {
             <section id="product-listing-section" className="dsc-container">
                 <h2 className="dsc-section-title dsc-mb20">Cadastro de produtos</h2>
                 <div className="dsc-btn-page-container dsc-mb20">
-                    <n buttonTitle="Novo" onButtonClick={handleCreateClick} />
+                    <ButtonInverse buttonTitle="Novo" onButtonClick={handleCreateClick} />
                 </div>
                 <SearchBar onSearch={handleSearch} />
                 <table className="dsc-table dsc-mb20 dsc-mt20">

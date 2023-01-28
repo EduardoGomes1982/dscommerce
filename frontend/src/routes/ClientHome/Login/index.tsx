@@ -29,7 +29,6 @@ export default function () {
     });
 
     const { setContextTokenPayload } = useContext(ContextToken);
-
     const navigate = useNavigate();
 
     function handleSubmit(event: any) {
