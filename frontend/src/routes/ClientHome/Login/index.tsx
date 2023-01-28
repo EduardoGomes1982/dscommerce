@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "../../../components/FormInput";
 import * as authService from "../../../services/auth-service";
 import { ContextToken } from "../../../utils/context-token";
+import * as forms from "../../../utils/forms";
 import "./styles.css";
 
 export default function () {
@@ -45,7 +46,7 @@ export default function () {
     function handleInputChange(event: any) {
         const value = event.target.value;
         const name = event.target.name;
-        setFormData({ ...formData, [name]: { ...formData[name], value: value } });
+        setFormData(forms.update(formData, name, value));
     }
 
     return (
