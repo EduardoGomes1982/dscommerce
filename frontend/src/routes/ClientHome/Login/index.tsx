@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FormInput from "../../../components/FormInput";
 import * as authService from "../../../services/auth-service";
 import { ContextToken } from "../../../utils/context-token";
 import "./styles.css";
@@ -44,7 +45,7 @@ export default function () {
     function handleInputChange(event: any) {
         const value = event.target.value;
         const name = event.target.name;
-        setFormData({ ...formData, [name]: { ...formData[name], value: value} });
+        setFormData({ ...formData, [name]: { ...formData[name], value: value } });
     }
 
     return (
@@ -55,13 +56,11 @@ export default function () {
                         <h2>Login</h2>
                         <div className="dsc-form-controls-container">
                             <div>
-                                <input className="dsc-form-control" type="text" name="username" value={formData.username.value}
-                                    placeholder="Email" onChange={handleInputChange} />
+                                <FormInput {...formData.username} className="dsc-form-control" onChange={handleInputChange} />
                                 <div className="dsc-form-error"></div>
                             </div>
                             <div>
-                                <input className="dsc-form-control" type="password" name="password" value={formData.password.value}
-                                    placeholder="Senha" onChange={handleInputChange} />
+                                <FormInput {...formData.password} className="dsc-form-control" onChange={handleInputChange} />
                             </div>
                         </div>
                         <div className="dsc-login-form-buttons dsc-mt20">
