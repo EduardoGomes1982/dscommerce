@@ -17,11 +17,15 @@ export default function ProductForm() {
             placeholder: "Nome"
         },
         price: {
-            value: "",
+            value: 10,
             id: "price",
             name: "price",
             type: "number",
-            placeholder: "Preço"
+            placeholder: "Preço",
+            validation: (value: any) => {
+                return value > 0;
+            },
+            message: "Informe um valor maior que zero"
         },
         imgUrl: {
             value: "",
