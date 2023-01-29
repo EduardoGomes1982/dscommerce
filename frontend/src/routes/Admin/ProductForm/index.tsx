@@ -58,6 +58,11 @@ export default function ProductForm() {
         setFormData(dataValidated);
     }
 
+    function handleInputDurty(event: any) {
+        const name = event.target.name;
+        setFormData(forms.toDirty(formData, name));
+    }
+
     return (
         <main>
             <section id="product-form-section" className="dsc-container">
@@ -66,15 +71,18 @@ export default function ProductForm() {
                         <h2>Dados do produto</h2>
                         <div className="dsc-form-controls-container">
                             <div>
-                                <FormInput {...formData.name} className="dsc-form-control" onChange={handleInputChange} />
+                                <FormInput {...formData.name} className="dsc-form-control" onChange={handleInputChange}
+                                    onBlur={handleInputDurty} />
                                 <div className="dsc-form-error">{formData.name.message}</div>
                             </div>
                             <div>
-                                <FormInput {...formData.price} className="dsc-form-control" onChange={handleInputChange} />
+                                <FormInput {...formData.price} className="dsc-form-control" onChange={handleInputChange}
+                                    onBlur={handleInputDurty} />
                                 <div className="dsc-form-error">{formData.price.message}</div>
                             </div>
                             <div>
-                                <FormInput {...formData.imgUrl} className="dsc-form-control" onChange={handleInputChange} />
+                                <FormInput {...formData.imgUrl} className="dsc-form-control" onChange={handleInputChange}
+                                    onBlur={handleInputDurty} />
                             </div>
                         </div>
 

@@ -1,7 +1,7 @@
 export default function FormInput(props: any) {
-    const { validation, invalid, ...inputProps } = props;
+    const { validation, invalid = "false", durty = "false", ...inputProps } = props;
 
     return (
-        <input {...inputProps} data-invalid={invalid} />
+        <input {...inputProps} data-invalid={invalid} data-durty={durty} />
     );
 }

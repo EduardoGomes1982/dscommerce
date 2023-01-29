@@ -1,5 +1,6 @@
 export function update(inputs: any, name: string, newValue: any) {
-    return { ...inputs, [name]: { ...inputs[name], value: newValue } };
+    const data: any = { ...inputs, [name]: { ...inputs[name], value: newValue } };
+    return data;
 }
 
 export function updateAll(inputs: any, newValues: any) {
@@ -18,5 +19,11 @@ export function validate(inputs: any, name: string) {
     if (!inputs[name].validation)
         return inputs;
     const isInvalid: boolean = !inputs[name].validation(inputs[name].value);
-    return { ...inputs, [name]: { ...inputs[name], invalid: isInvalid.toString() } };
+    const data: any = { ...inputs, [name]: { ...inputs[name], invalid: isInvalid.toString() } }
+    return data;
+}
+
+export function toDirty(inputs: any, name: string) {
+    const data: any = { ...inputs, [name]: { ...inputs[name], durty: inputs[name].value !== "" ? "true" : "false" } };
+    return data;
 }
