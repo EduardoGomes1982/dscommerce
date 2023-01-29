@@ -17,13 +17,13 @@ export default function ProductForm() {
             placeholder: "Nome"
         },
         price: {
-            value: 10,
+            value: "",
             id: "price",
             name: "price",
             type: "number",
             placeholder: "Preço",
             validation: (value: any) => {
-                return value > 0;
+                return Number(value) > 0;
             },
             message: "Informe um valor maior que zero"
         },
@@ -53,7 +53,9 @@ export default function ProductForm() {
     function handleInputChange(event: any) {
         const value = event.target.value;
         const name = event.target.name;
-        setFormData(forms.update(formData, name, value));
+        const dataUpdated = forms.update(formData, name, value);
+        const dataValidated = forms.validate(dataUpdated, name);
+        setFormData(dataValidated);
     }
 
     return (
@@ -65,9 +67,11 @@ export default function ProductForm() {
                         <div className="dsc-form-controls-container">
                             <div>
                                 <FormInput {...formData.name} className="dsc-form-control" onChange={handleInputChange} />
+                                <div className="dsc-form-error">{formData.name.message}</div>
                             </div>
                             <div>
                                 <FormInput {...formData.price} className="dsc-form-control" onChange={handleInputChange} />
+                                <div className="dsc-form-error">{formData.price.message}</div>
                             </div>
                             <div>
                                 <FormInput {...formData.imgUrl} className="dsc-form-control" onChange={handleInputChange} />
