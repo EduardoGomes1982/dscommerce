@@ -6,6 +6,7 @@ import FormInput from "../../../components/FormInput";
 import * as forms from "../../../utils/forms";
 import * as productService from "../../../services/product-service";
 import "./styles.css";
+import FormTextArea from "../../../components/FormTextArea";
 
 export default function ProductForm() {
     const [formData, setFormData] = useState<any>({
@@ -37,6 +38,17 @@ export default function ProductForm() {
             name: "imgUrl",
             type: "text",
             placeholder: "Imagem"
+        },
+        description: {
+            value: "",
+            id: "description",
+            name: "description",
+            type: "text",
+            placeholder: "Descrição do Produto",
+            validation: (value: string) => {
+                return /^.{10,}$/.test(value);
+            },
+            message: "A descrição deve ter 10 caracteres ou mais"
         }
     });
 
@@ -86,6 +98,9 @@ export default function ProductForm() {
                                 <FormInput {...formData.imgUrl} className="dsc-form-control" onChange={handleInputChange}
                                     onBlur={handleInputDirty} />
                             </div>
+                            <FormTextArea {...formData.description} className="dsc-textarea dsc-form-control" onChange={handleInputChange}
+                                onBlur={handleInputDirty} />
+                            <div className="dsc-form-error">{formData.description.message}</div>
                         </div>
 
                         <div className="dsc-product-form-buttons">
