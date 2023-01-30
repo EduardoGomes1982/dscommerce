@@ -64,11 +64,12 @@ export default function () {
                             <div>
                                 <FormInput {...formData.username} className="dsc-form-control" onChange={handleInputChange}
                                     onBlur={handleInputDirty} />
-                                <div className="dsc-form-error"></div>
+                                <div className="dsc-form-error">{formData.username.message}</div>
                             </div>
                             <div>
                                 <FormInput {...formData.password} className="dsc-form-control" onChange={handleInputChange}
                                     onBlur={handleInputDirty} />
+                                <div className="dsc-form-error">{formData.username.message}</div>
                             </div>
                         </div>
                         <div className="dsc-login-form-buttons dsc-mt20">
