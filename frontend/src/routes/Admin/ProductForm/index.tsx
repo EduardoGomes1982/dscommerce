@@ -53,14 +53,12 @@ export default function ProductForm() {
     function handleInputChange(event: any) {
         const value = event.target.value;
         const name = event.target.name;
-        const dataUpdated = forms.update(formData, name, value);
-        const dataValidated = forms.validate(dataUpdated, name);
-        setFormData(dataValidated);
+        setFormData(forms.updateAndValidate(formData, name, value));
     }
 
-    function handleInputDurty(event: any) {
+    function handleInputDirty(event: any) {
         const name = event.target.name;
-        setFormData(forms.toDirty(formData, name));
+        setFormData(forms.dirtyAndValidate(formData, name));
     }
 
     return (
@@ -72,17 +70,17 @@ export default function ProductForm() {
                         <div className="dsc-form-controls-container">
                             <div>
                                 <FormInput {...formData.name} className="dsc-form-control" onChange={handleInputChange}
-                                    onBlur={handleInputDurty} />
+                                    onBlur={handleInputDirty} />
                                 <div className="dsc-form-error">{formData.name.message}</div>
                             </div>
                             <div>
                                 <FormInput {...formData.price} className="dsc-form-control" onChange={handleInputChange}
-                                    onBlur={handleInputDurty} />
+                                    onBlur={handleInputDirty} />
                                 <div className="dsc-form-error">{formData.price.message}</div>
                             </div>
                             <div>
                                 <FormInput {...formData.imgUrl} className="dsc-form-control" onChange={handleInputChange}
-                                    onBlur={handleInputDurty} />
+                                    onBlur={handleInputDirty} />
                             </div>
                         </div>
 
