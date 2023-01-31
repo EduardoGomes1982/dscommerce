@@ -3,10 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import FormInput from "../../../components/FormInput";
-import * as forms from "../../../utils/forms";
-import * as productService from "../../../services/product-service";
-import "./styles.css";
+import FormSelect from "../../../components/FormSelect";
 import FormTextArea from "../../../components/FormTextArea";
+import { CategoryDTO } from "../../../models/category";
+import * as categoryService from "../../../services/category-service";
+import * as productService from "../../../services/product-service";
+import * as forms from "../../../utils/forms";
+import "./styles.css";
 
 export default function ProductForm() {
     const [formData, setFormData] = useState<any>({
@@ -49,14 +52,27 @@ export default function ProductForm() {
                 return /^.{10,}$/.test(value);
             },
             message: "A descrição deve ter 10 caracteres ou mais"
+        },
+        categories: {
+            value: [],
+            id: "categories",
+            name: "categories",
+            placeholder: "Categorias",
+            validation: (value: CategoryDTO[]) => {
+                return value.length > 0;
+            },
+            message: "Selecione ao menos uma categoria"
         }
     });
 
+    const [categories, setCategories] = useState<CategoryDTO[]>([])
     const navigate = useNavigate();
     const params = useParams();
     const isEditing = params.productId !== "create";
 
     useEffect(() => {
+        categoryService.findAllRequest()
+            .then(response => setCategories(response.data));
         if (isEditing)
             productService.findById(Number(params.productId))
                 .then(response => setFormData(forms.updateAll(formData, response.data)));
@@ -84,20 +100,19 @@ export default function ProductForm() {
                     <form className="dsc-card dsc-form">
                         <h2>Dados do produto</h2>
                         <div className="dsc-form-controls-container">
-                            <div>
-                                <FormInput {...formData.name} className="dsc-form-control" onChange={handleInputChange}
-                                    onBlur={handleInputDirty} />
-                                <div className="dsc-form-error">{formData.name.message}</div>
-                            </div>
-                            <div>
-                                <FormInput {...formData.price} className="dsc-form-control" onChange={handleInputChange}
-                                    onBlur={handleInputDirty} />
-                                <div className="dsc-form-error">{formData.price.message}</div>
-                            </div>
-                            <div>
-                                <FormInput {...formData.imgUrl} className="dsc-form-control" onChange={handleInputChange}
-                                    onBlur={handleInputDirty} />
-                            </div>
+                            <FormInput {...formData.name} className="dsc-form-control" onChange={handleInputChange}
+                                onBlur={handleInputDirty} />
+                            <div className="dsc-form-error">{formData.name.message}</div>
+                            <FormInput {...formData.price} className="dsc-form-control" onChange={handleInputChange}
+                                onBlur={handleInputDirty} />
+                            <div className="dsc-form-error">{formData.price.message}</div>
+                            <FormInput {...formData.imgUrl} className="dsc-form-control" onChange={handleInputChange}
+                                onBlur={handleInputDirty} />
+                            <FormSelect {...formData.categories} className="dsc-form-control" options={categories}
+                                getOptionValue={(e: any) => e.id.toString()} getOptionLabel={(e: any) => e.name} isClearable isMulti
+                                onChange={(e: any) => setFormData(forms.updateAndValidate(formData, "categories", e))}
+                                onBlur={handleInputDirty} />
+                            <div className="dsc-form-error">{formData.categories.message}</div>
                             <FormTextArea {...formData.description} className="dsc-textarea dsc-form-control" onChange={handleInputChange}
                                 onBlur={handleInputDirty} />
                             <div className="dsc-form-error">{formData.description.message}</div>
