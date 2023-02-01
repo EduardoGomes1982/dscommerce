@@ -9,6 +9,7 @@ import { CategoryDTO } from "../../../models/category";
 import * as categoryService from "../../../services/category-service";
 import * as productService from "../../../services/product-service";
 import * as forms from "../../../utils/forms";
+import { selectStyles } from "../../../utils/select";
 import "./styles.css";
 
 export default function ProductForm() {
@@ -108,10 +109,10 @@ export default function ProductForm() {
                             <div className="dsc-form-error">{formData.price.message}</div>
                             <FormInput {...formData.imgUrl} className="dsc-form-control" onChange={handleInputChange}
                                 onBlur={handleInputDirty} />
-                            <FormSelect {...formData.categories} className="dsc-form-control" options={categories}
+                            <FormSelect {...formData.categories} className="dsc-form-control dsc-form-control-container" options={categories}
                                 getOptionValue={(e: any) => e.id.toString()} getOptionLabel={(e: any) => e.name} isClearable isMulti
                                 onChange={(e: any) => setFormData(forms.updateAndValidate(formData, "categories", e))}
-                                onBlur={handleInputDirty} />
+                                onBlur={(e: any) => setFormData(forms.dirtyAndValidate(formData,"categories"))} styles={selectStyles} />
                             <div className="dsc-form-error">{formData.categories.message}</div>
                             <FormTextArea {...formData.description} className="dsc-textarea dsc-form-control" onChange={handleInputChange}
                                 onBlur={handleInputDirty} />

@@ -265,16 +265,8 @@ nav a {
   display: unset;
 }
 
-.dsc-select:invalid {
-  color: var(--dsc-color-font-placeholder);
-}
-
-.dsc-select option[disabled] {
-  display: none;
-}
-
-.dsc-select option {
-  color: var(--dsc-color-font-primary);
+.dsc-form-control-container {
+  padding: unset;
 }
 
 .dsc-textarea {
