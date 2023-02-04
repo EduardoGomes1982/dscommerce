@@ -100,6 +100,12 @@ export default function ProductForm() {
             setFormData(formaDataValidated);
             return;
         }
+        const requestBody = forms.toValues(formaDataValidated);
+        if (isEditing) requestBody.id = params.productId;
+        const request = isEditing
+            ? productService.updateRequest(requestBody)
+            : productService.insertRequest(requestBody);
+        request.then(() => navigate("/admin/products"))
     }
 
     return (

@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { ProductDTO } from "../models/product";
 import { BASE_URL } from "../utils/system";
 import { requestBackend } from "./requests";
 
@@ -25,6 +26,26 @@ export function deleteById(id: number) {
         method: "DELETE",
         url: `/products/${id}`,
         withCredentials: true
+    };
+    return requestBackend(config);
+}
+
+export function updateRequest(formData: ProductDTO) {
+    const config: AxiosRequestConfig = {
+        method: "PUT",
+        url: `/products/${formData.id}`,
+        withCredentials: true,
+        data: formData
+    };
+    return requestBackend(config);
+}
+
+export function insertRequest(formData: ProductDTO) {
+    const config: AxiosRequestConfig = {
+        method: "POST",
+        url: "/products",
+        withCredentials: true,
+        data: formData
     };
     return requestBackend(config);
 }
