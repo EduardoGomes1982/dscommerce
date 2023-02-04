@@ -35,3 +35,37 @@ export function updateAndValidate(inputs: any, name: string, newValue: any) {
 export function dirtyAndValidate(inputs: any, name: string) {
     return validate(toDirty(inputs, name), name);
 }
+
+export function toDirtyAll(inputs: any) {
+    const data: any = {};
+    Object.keys(inputs).forEach(e => data[e] = { ...inputs[e], dirty: "true" });
+    return data;
+}
+
+export function toValidateAll(inputs: any) {
+    const data: any = {};
+    Object.keys(inputs).forEach(e => {
+        if (inputs[e].validation) {
+            const isInvalid = !inputs[e].validation(inputs[e].value);
+            data[e] = { ...inputs[e], invalid: isInvalid.toString() };
+        } else {
+            data[e] = { ...inputs[e] };
+        }
+    })
+    return data;
+}
+
+export function dirtyAndValidateAll(inputs: any) {
+    return toValidateAll(toDirtyAll(inputs));
+}
+
+export function hasAnyInvalid(inputs: any) {
+    let result: boolean = false;
+    Object.keys(inputs).forEach(e => {
+        if (inputs[e].dirty === "true" && inputs[e].invalid === "true") {
+            result = true;
+            return;
+        }
+    });
+    return result;
+}

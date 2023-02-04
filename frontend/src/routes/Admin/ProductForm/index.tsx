@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSubmit } from "react-router-dom";
 import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import FormInput from "../../../components/FormInput";
@@ -94,6 +94,17 @@ export default function ProductForm() {
         setFormData(forms.dirtyAndValidate(formData, name));
     }
 
+    function handleSaveClick() {
+        const formaDataValidated = forms.dirtyAndValidateAll(formData);
+        const test = forms.hasAnyInvalid(formaDataValidated);
+        if (test) {
+            setFormData(formaDataValidated);
+            return;
+        }
+        
+        console.log(test);
+    }
+
     return (
         <main>
             <section id="product-form-section" className="dsc-container">
@@ -112,7 +123,7 @@ export default function ProductForm() {
                             <FormSelect {...formData.categories} className="dsc-form-control dsc-form-control-container" options={categories}
                                 getOptionValue={(e: any) => e.id.toString()} getOptionLabel={(e: any) => e.name} isClearable isMulti
                                 onChange={(e: any) => setFormData(forms.updateAndValidate(formData, "categories", e))}
-                                onBlur={(e: any) => setFormData(forms.dirtyAndValidate(formData,"categories"))} styles={selectStyles} />
+                                onBlur={(e: any) => setFormData(forms.dirtyAndValidate(formData, "categories"))} styles={selectStyles} />
                             <div className="dsc-form-error">{formData.categories.message}</div>
                             <FormTextArea {...formData.description} className="dsc-textarea dsc-form-control" onChange={handleInputChange}
                                 onBlur={handleInputDirty} />
@@ -121,7 +132,7 @@ export default function ProductForm() {
 
                         <div className="dsc-product-form-buttons">
                             <ButtonInverse buttonTitle="Cancelar" onButtonClick={handleCancelClick} />
-                            <ButtonPrimary buttonTitle="Novo" />
+                            <ButtonPrimary buttonTitle="Salvar" onButtonClick={handleSaveClick} />
                         </div>
                     </form>
                 </div>
