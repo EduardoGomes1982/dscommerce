@@ -69,3 +69,13 @@ export function hasAnyInvalid(inputs: any) {
     });
     return result;
 }
+
+export function setBackendErrors(inputs: any, erros: any[]) {
+    const data = { ...inputs };
+    erros.forEach(err => {
+        data[err.fieldName].message = err.message;
+        data[err.fieldName].dirty = "true";
+        data[err.fieldName].invalid = "true";
+    })
+    return data;
+}

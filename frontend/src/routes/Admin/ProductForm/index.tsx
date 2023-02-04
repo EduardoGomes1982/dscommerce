@@ -66,18 +66,15 @@ export default function ProductForm() {
         }
     });
 
-    const [categories, setCategories] = useState<CategoryDTO[]>([])
+    const [categories, setCategories] = useState<CategoryDTO[]>([]);
     const navigate = useNavigate();
     const params = useParams();
     const isEditing = params.productId !== "create";
 
     useEffect(() => {
-        categoryService.findAllRequest()
-            .then(response => setCategories(response.data));
-        if (isEditing)
-            productService.findById(Number(params.productId))
-                .then(response => setFormData(forms.updateAll(formData, response.data)));
-    }, [])
+        categoryService.findAllRequest().then(response => setCategories(response.data));
+        if (isEditing) productService.findById(Number(params.productId)).then(response => setFormData(forms.updateAll(formData, response.data)));
+    }, []);
 
     function handleCancelClick() {
         navigate("/admin/products");
@@ -105,7 +102,9 @@ export default function ProductForm() {
         const request = isEditing
             ? productService.updateRequest(requestBody)
             : productService.insertRequest(requestBody);
-        request.then(() => navigate("/admin/products"))
+        request
+            .then(() => navigate("/admin/products"))
+            .catch(error => setFormData(forms.setBackendErrors(formData, error.response.data.errors)));
     }
 
     return (
@@ -132,7 +131,6 @@ export default function ProductForm() {
                                 onBlur={handleInputDirty} />
                             <div className="dsc-form-error">{formData.description.message}</div>
                         </div>
-
                         <div className="dsc-product-form-buttons">
                             <ButtonInverse buttonTitle="Cancelar" onButtonClick={handleCancelClick} />
                             <ButtonPrimary buttonTitle="Salvar" onButtonClick={handleSaveClick} />

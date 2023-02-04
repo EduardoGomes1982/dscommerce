@@ -110,8 +110,7 @@ export default function ProductListing() {
                                     </td>
                                     <td>
                                         <img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar"
-                                            onClick={() => handleDeleteClick(product.id)}
-                                        />
+                                            onClick={() => handleDeleteClick(product.id)} />
                                     </td>
                                 </tr>
                             ))
@@ -127,8 +126,7 @@ export default function ProductListing() {
             {
                 dialogConfirmationAnswer.visible &&
                 <DialogConfirmation message={dialogConfirmationAnswer.message} onDialogAnswer={handleDialogConfirmationAnswer}
-                    id={dialogConfirmationAnswer.id}
-                />
+                    id={dialogConfirmationAnswer.id} />
             }
         </main>
     );
