@@ -257,6 +257,16 @@ nav a {
   display: none;
 }
 
+.dsc-form-error-global {
+  border: solid 1px var(--dsc-color-error);
+  border-radius: 5px;
+  font-size: 12px;
+  color: var(--dsc-color-error);
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
 .dsc-form-control[data-invalid="true"][data-dirty="true"] {
   border: 1px solid var(--dsc-color-error);
 }
