@@ -96,13 +96,10 @@ export default function ProductForm() {
 
     function handleSaveClick() {
         const formaDataValidated = forms.dirtyAndValidateAll(formData);
-        const test = forms.hasAnyInvalid(formaDataValidated);
-        if (test) {
+        if (forms.hasAnyInvalid(formaDataValidated)) {
             setFormData(formaDataValidated);
             return;
         }
-        
-        console.log(test);
     }
 
     return (
