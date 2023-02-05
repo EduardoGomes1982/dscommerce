@@ -102,7 +102,7 @@ export default function ProductListing() {
                                 <tr key={product.id}>
                                     <td className="dsc-tb576">{product.id}</td>
                                     <td><img className="dsc-product-listing-image" src={product.imgUrl} alt={product.name} /></td>
-                                    <td className="dsc-tb768">R$ {product.price}</td>
+                                    <td className="dsc-tb768">R$ {product.price.toFixed(2)}</td>
                                     <td className="dsc-txt-left">{product.name}</td>
                                     <td>
                                         <img className="dsc-product-listing-btn" src={editIcon} alt="Editar"
